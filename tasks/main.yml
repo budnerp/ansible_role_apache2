@@ -1,5 +1,5 @@
 ---
-  - name: Install httpd service
+  - name: HTTPD - install httpd service
     yum:
       name: httpd
       state: installed
@@ -9,20 +9,28 @@
     retries: 3
     delay: 5
 
-  - name: Enable and start service httpd
+  - name: HTTPD - upload 00-mpm.conf custom settings /etc/httpd/conf.modules.d/00-mpm.conf
+    template:
+      src: etc/httpd/conf.modules.d/00-mpm.conf.j2
+      dest: /etc/httpd/conf.modules.d/00-mpm.conf
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: HTTPD - enable and start service httpd
     systemd:
       name: httpd
       enabled: yes
       state: started
 
-  - name: Append vagrant user to apache group
+  - name: HTTPD - append vagrant user to apache group
     user:
       name: vagrant
       groups: apache
       append: yes
       state: present
 
-  - name: Alter /var/www/html folder ownership
+  - name: HTTPD - alter /var/www/html folder ownership
     file:
       path: /var/www/html
       owner: apache

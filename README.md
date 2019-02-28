@@ -10,7 +10,7 @@ Ansible role for httpd/apache2 installation for CentOS 7
     ``` 
     /etc/httpd/conf.modules.d/ directory (e.g. PHP)
     ```
-3. Select MPMs (Processing Model) as loadable modules [`worker`, `prefork` (default)] and event: 
+3. Select MPMs (Processing Model) as loadable modules [`worker`, `prefork` (default)] and `event`: 
     ```
     /etc/httpd/conf.modules.d/00-mpm.conf
     ```
